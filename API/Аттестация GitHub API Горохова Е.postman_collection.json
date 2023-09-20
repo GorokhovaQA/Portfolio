@@ -1,0 +1,673 @@
+{
+	"info": {
+		"_postman_id": "3e560eba-5dbd-4ca0-bf18-41c345f85bce",
+		"name": "Аттестация GitHub API Горохова Е",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25776647"
+	},
+	"item": [
+		{
+			"name": "Получение списка Issues",
+			"item": [
+				{
+					"name": "Получение списка Issues",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{BaseURL}}/repos/{{Owner}}/{{Repo}}/issues",
+							"protocol": "https",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"repos",
+								"{{Owner}}",
+								"{{Repo}}",
+								"issues"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Создание Issue",
+			"item": [
+				{
+					"name": "Создание Issue",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"var key = \"N_issue\"\r",
+									"var value = pm.response.json().number\r",
+									"pm.collectionVariables.set(key, value)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n \"title\": \"Issue 1\",\r\n \"body\": \"Something went wrong\",\r\n \"assignee\": \"{{Owner}}\",\r\n \"labels\": [\"bug\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{BaseURL}}/repos/{{Owner}}/{{Repo}}/issues",
+							"protocol": "https",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"repos",
+								"{{Owner}}",
+								"{{Repo}}",
+								"issues"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Получение списка Issues",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{BaseURL}}/repos/{{Owner}}/{{Repo}}/issues",
+							"protocol": "https",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"repos",
+								"{{Owner}}",
+								"{{Repo}}",
+								"issues"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Удаление Issue",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n \"state\": \"closed\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{BaseURL}}/repos/{{Owner}}/{{Repo}}/issues/{{N_issue}}",
+							"protocol": "https",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"repos",
+								"{{Owner}}",
+								"{{Repo}}",
+								"issues",
+								"{{N_issue}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Переименование Issue",
+			"item": [
+				{
+					"name": "Создание Issue",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"var key = \"N_issue\"\r",
+									"var value = pm.response.json().number\r",
+									"pm.collectionVariables.set(key, value)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n \"title\": \"Issue 1\",\r\n \"body\": \"Something went wrong\",\r\n \"assignee\": \"{{Owner}}\",\r\n \"labels\": [\"bug\"]\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{BaseURL}}/repos/{{Owner}}/{{Repo}}/issues",
+							"protocol": "https",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"repos",
+								"{{Owner}}",
+								"{{Repo}}",
+								"issues"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Получение списка Issues",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{BaseURL}}/repos/{{Owner}}/{{Repo}}/issues",
+							"protocol": "https",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"repos",
+								"{{Owner}}",
+								"{{Repo}}",
+								"issues"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Переименование Issue",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n \"title\": \"Issue 2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{BaseURL}}/repos/{{Owner}}/{{Repo}}/issues/{{N_issue}}",
+							"protocol": "https",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"repos",
+								"{{Owner}}",
+								"{{Repo}}",
+								"issues",
+								"{{N_issue}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Получение списка Issues",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{BaseURL}}/repos/{{Owner}}/{{Repo}}/issues",
+							"protocol": "https",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"repos",
+								"{{Owner}}",
+								"{{Repo}}",
+								"issues"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Удаление Issue",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n \"state\": \"closed\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{BaseURL}}/repos/{{Owner}}/{{Repo}}/issues/{{N_issue}}",
+							"protocol": "https",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"repos",
+								"{{Owner}}",
+								"{{Repo}}",
+								"issues",
+								"{{N_issue}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Удаление Issue",
+			"item": [
+				{
+					"name": "Создание Issue",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"var key = \"N_issue\"\r",
+									"var value = pm.response.json().number\r",
+									"pm.collectionVariables.set(key, value)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n \"title\": \"Issue 1\",\r\n \"body\": \"Something went wrong\",\r\n \"assignee\": \"{{Owner}}\",\r\n \"labels\": [\"bug\"]\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{BaseURL}}/repos/{{Owner}}/{{Repo}}/issues",
+							"protocol": "https",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"repos",
+								"{{Owner}}",
+								"{{Repo}}",
+								"issues"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Получение списка Issues",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{BaseURL}}/repos/{{Owner}}/{{Repo}}/issues",
+							"protocol": "https",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"repos",
+								"{{Owner}}",
+								"{{Repo}}",
+								"issues"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Удаление Issue",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n \"state\": \"closed\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{BaseURL}}/repos/{{Owner}}/{{Repo}}/issues/{{N_issue}}",
+							"protocol": "https",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"repos",
+								"{{Owner}}",
+								"{{Repo}}",
+								"issues",
+								"{{N_issue}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Получение списка Issues",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{BaseURL}}/repos/{{Owner}}/{{Repo}}/issues",
+							"protocol": "https",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"repos",
+								"{{Owner}}",
+								"{{Repo}}",
+								"issues"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "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",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "BaseURL",
+			"value": "api.github.com"
+		},
+		{
+			"key": "Owner",
+			"value": ""
+		},
+		{
+			"key": "Repo",
+			"value": ""
+		},
+		{
+			"key": "N_issue",
+			"value": ""
+		}
+	]
+}
