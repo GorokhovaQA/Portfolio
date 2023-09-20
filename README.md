@@ -1,37 +1,87 @@
-**1. Задание по API:**
-Напишите позитивные и негативные тест-кейсы на проверку ручки регистрации.
+# TZ
+## Документация API для коллекции "Переименование Issue"
+### Variables:
+{{BaseUrl}} = api.github.com, {{Owner}} = GorokhovaQA, {{Repo}} = TZ, {{N_issue}} = issue_number
+### Tests and Snippets.
+В данной коллекции были использованы скрипты:
 
-Есть запрос регистрации вида:
+1. Проверка статуса кода ответа
 
-**Request:** api/v1/register
+   pm.test("Status code is 200", function ()
 
-{ login: String, email: String; password: String; confirmPassword: String; }
+   {
+    pm.response.to.have.status(200);
+});
 
-**Response:**
+2. Скрипт для присвоения значения переменной issue_number:
 
-{ code: int; result: String; }
+   var key = "N_issue"
 
-Также есть ручка getUser, которая возвращает информацию о том, существует ли такой пользователь или нет. Необходимо проверить наличие пользователя.
+   var value = pm.response.json().number
 
-**Request:** api/v1/getUser { login: String }
+   pm.collectionVariables.set(key, value)
 
-**Response:** { code: int; result: String; }
+### 1. Authorization
+Bearer Token:
+this folder is using an authorization helper from collection Аттестация GitHub API Горохова Е
+### 2. Создание Issue
+POST https://{{BaseUrl}}/repos/{{Owner}}/{{Repo}}/issues
 
-Все данные сохраняются в базу данных.
+Создание Issue с параметрами:
 
-**Дополнительный вопрос:** как бы вы проверили работу данного функционала на сайте?
+Название: Issue 1, описание: Something went wrong,
+Labels: bug, Assignee: GorokhovaQA
 
-В результате выполнения задания мною были разработаны позитивные сценарии с валидными данными, а также негативные сценарии с валидными/невалидными данными
-(так как четких требований к заданию не прилагалось, мною, на основании опыта и здравого смысла, был составлен чек-лист с данными для позитивных и негативных проверок  полей "Логин" и "Email") Для каждого тест-кейса были указаны тестовые данные, шаги и ожидаемый результат, а также были включены проверки статуса кода и структуры 
-ответа.
+Body request (json):
 
-**Итоги:** было разработано 11 тест-кейсов для проверки ручки регистрации.
+{
+ "title": "Issue 1",
 
-**2. Задание:** Необходимо протестировать лифт в девятиэтажном доме. 
+ "body": "Something went wrong",
 
-**Решение:** В ходе выполнения задания был составлен чек-лист для тестирования лифта, выделены классы эквивалентности и предложены тестовые данные. 
-Данный чек-лист включает функциональные проверки различных частей системы (лифта), тестирование безопасности, нагрузочное и стресс-тестирование, а
-также UX/UI проверки.
+ "assignee": "GorokhovaQA",
 
-**Итоги:** было разработано 58 проверок для тестирования лифта.
+ "labels": ["bug"]
+}
 
+Status code: 201 (Created)
+
+### 3. Получение списка Issues
+GET https://{{BaseUrl}}/repos/{{Owner}}/{{Repo}}/issues
+
+Получение списка Issues для пользователя для проверки создания Issue 1
+
+Status code: 200 (Ok)
+
+### 4. Переименование Issue
+PATCH https://{{BaseUrl}}/repos/{{Owner}}/{{Repo}}/issues/{{N_issue}}
+
+Изменение названия с Issue 1 на Issue 2
+
+Body request (json):
+
+{
+ "title": "Issue 2"
+}
+
+Status code: 200 (Ok)
+
+### 5. Получение списка Issues
+GET https://{{BaseUrl}}/repos/{{Owner}}/{{Repo}}/issues
+
+Получение списка Issues для пользователя для проверки переименования Issue 1 на Issue 2
+
+Status code: 200 (Ok)
+
+### 6. Удаление Issue (закрытие Issue)
+PATCH https://{{BaseUrl}}/repos/{{Owner}}/{{Repo}}/issues/{{N_issue}}
+
+Закрытие Issue 2
+
+Body request (json):
+
+{
+ "state": "closed"
+}
+
+Status code: 200 (Ok)
