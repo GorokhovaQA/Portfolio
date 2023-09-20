@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "3e560eba-5dbd-4ca0-bf18-41c345f85bce",
+		"_postman_id": "",
 		"name": "Аттестация GitHub API Горохова Е",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "25776647"
+		"schema": "",
+		"_exporter_id": ""
 	},
 	"item": [
 		{
@@ -626,8 +626,8 @@
 		"type": "bearer",
 		"bearer": [
 			{
-				"key": "token",
-				"value": "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",
+				"key": "",
+				"value": "",
 				"type": "string"
 			}
 		]
